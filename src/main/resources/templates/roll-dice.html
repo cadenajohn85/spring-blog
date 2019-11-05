@@ -6,6 +6,8 @@
 </head>
 <body>
 
+    <div th:replace="fragments/navbar :: navbar"></div>
+
     <h1>What do you think the outcome of the next roll will be?</h1>
 
     <ul>
@@ -24,6 +26,8 @@
         <li th:text="${rollMsg}"></li>
         <li th:text="${guess == roll} ? 'You guessed correctly!' : 'Your guess was incorrect.'"></li>
     </ul>
+
+    <div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
