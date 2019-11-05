@@ -2,3 +2,16 @@ body {
     padding: 1em;
     background: lightblue;
 }
+
+.main-navbar {
+    background-color: deepskyblue;
+}
+
+.main-navbar ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-navbar li {
+    margin: 0 .5em;
+}
