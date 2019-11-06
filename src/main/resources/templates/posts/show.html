@@ -13,16 +13,18 @@
 
     <p th:text="${post.body}"></p>
 
-    <div th:replace="fragments/footer :: footer"></div>
+    <div class="button-bar">
+        <form action="/posts/delete" method="post">
+            <input type="hidden" name="id" th:value="${post.id}">
+            <button type="submit">Delete</button>
+        </form>
+        <form action="/posts/edit" method="get">
+            <input type="hidden" name="id" th:value="${post.id}">
+            <button type="submit">Edit</button>
+        </form>
+    </div>
 
-    <form action="/posts/delete" method="post">
-        <input type="hidden" name="id" th:value="${post.id}">
-        <button type="submit">Delete</button>
-    </form>
-    <form action="/posts/edit" method="get">
-        <input type="hidden" name="id" th:value="${post.id}">
-        <button type="submit">Edit</button>
-    </form>
+    <div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
