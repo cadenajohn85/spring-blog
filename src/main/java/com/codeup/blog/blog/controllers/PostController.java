@@ -1,43 +1,40 @@
 package com.codeup.blog.blog.controllers;
 
-import com.codeup.blog.blog.Post;
+import com.codeup.blog.blog.models.Post;
+import com.codeup.blog.blog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostController {
 
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+        this.postDao = postDao;
+    }
+
     @GetMapping("/posts")
     public String getAllPosts(Model vModel) {
-        ArrayList<Post> postsList = new ArrayList<>();
-        postsList.add(new Post("My first post", "Very cool content."));
-        postsList.add(new Post("A more recent post", "Even cooler content."));
-        vModel.addAttribute("posts", postsList);
+        vModel.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
     public String getPostById(@PathVariable long id, Model vModel) {
-        Post postToView = new Post("Title of my post", "Super-engaging content");
-        vModel.addAttribute("post", postToView);
+        vModel.addAttribute("post", postDao.getOne(id));
         return "posts/show";
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String getCreatePostForm() {
-        return "view the form for creating a post";
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String submitCreatePostForm() {
-        return "create a new post";
+    public String submitCreatePostForm(@RequestParam("title") String title, @RequestParam("description") String description) {
+        long newPostId = postDao.save(new Post(title, description)).getId();
+        return "redirect:/posts/" + newPostId;
     }
 }
