@@ -33,8 +33,35 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String submitCreatePostForm(@RequestParam("title") String title, @RequestParam("description") String description) {
-        long newPostId = postDao.save(new Post(title, description)).getId();
+    public String submitCreatePostForm(@RequestParam("title") String title, @RequestParam("body") String body) {
+        long newPostId = postDao.save(new Post(title, body)).getId();
         return "redirect:/posts/" + newPostId;
     }
+
+    @PostMapping("/posts/delete")
+    public String deletePost(@RequestParam("id") String id) {
+        long deletePostId = Long.parseLong(id);
+        postDao.deleteById(deletePostId);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/edit")
+    public String getEditPostForm(@RequestParam("id") String id, Model vModel) {
+        long editPostId = Long.parseLong(id);
+        vModel.addAttribute("post", postDao.getOne(editPostId));
+        return "posts/edit";
+    }
+
+    @PostMapping("/posts/edit")
+    public String editPost(@RequestParam("id") String id, @RequestParam("title") String title,
+                           @RequestParam("body") String body) {
+        long editPostId = Long.parseLong(id);
+        Post posttoEdit = postDao.getOne(editPostId);
+        posttoEdit.setBody(body);
+        posttoEdit.setTitle(title);
+        postDao.save(posttoEdit);
+        return "redirect:/posts/" + editPostId;
+    }
+
+
 }
