@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Post - </title>
+    <title th:text="${titleMsg}"></title>
     <th:block th:replace="fragments/head :: styling"></th:block>
 </head>
 <body>
@@ -12,6 +12,17 @@
     <h1 th:text="${post.title}"></h1>
 
     <p th:text="${post.body}"></p>
+
+    <div class="button-bar">
+        <form action="/posts/delete" method="post">
+            <input type="hidden" name="id" th:value="${post.id}">
+            <button type="submit">Delete</button>
+        </form>
+        <form action="/posts/edit" method="get">
+            <input type="hidden" name="id" th:value="${post.id}">
+            <button type="submit">Edit</button>
+        </form>
+    </div>
 
     <div th:replace="fragments/footer :: footer"></div>
 
