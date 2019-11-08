@@ -13,6 +13,8 @@
 
     <p th:text="${post.body}"></p>
 
+    <p>Contact this post author at: <span th:text="${post.user.email}"></span>.</p>
+
     <div class="button-bar">
         <form action="/posts/delete" method="post">
             <input type="hidden" name="id" th:value="${post.id}">
