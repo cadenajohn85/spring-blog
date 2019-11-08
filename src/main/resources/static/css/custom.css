@@ -3,16 +3,21 @@ body {
     background: lightblue;
 }
 
-.main-navbar {
+.custom-navbar {
     background-color: deepskyblue;
 }
 
-.main-navbar ul {
+.custom-navbar ul {
     list-style: none;
     display: flex;
 }
 
-.main-navbar li {
+/*Add top margin to the first element underneath the navbar, since it has Z-index*/
+.custom-navbar + * {
+    margin-top: 4em;
+}
+
+.custom li {
     margin: 0 .5em;
 }
 
