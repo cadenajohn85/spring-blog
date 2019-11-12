@@ -36,16 +36,20 @@ public class PostController {
 
     // View the "Create Post" form
     @GetMapping("/posts/create")
-    public String getCreatePostForm() {
+    public String getCreatePostForm(Model vModel) {
+        vModel.addAttribute("post", new Post());
         return "posts/create";
     }
 
     // Submit the "Create Post" form
     @PostMapping("/posts/create")
-    public String submitCreatePostForm(
-            @RequestParam("title") String title,
-            @RequestParam("body") String body) {
-        long newPostId = postDao.save(new Post(title, body, userDao.getOne(3L))).getId();
+    public String submitCreatePostForm(@ModelAttribute Post postFromForm) {
+//        long newPostId = postDao.save(new Post(title, body, userDao.getOne(3L))).getId();
+
+//        long newPostId = postDao.save(postFromForm.setUser(userDao.getOne(3L))).getId();
+        postFromForm.setUser(userDao.getOne(3L));
+        postDao.save(postFromForm);
+        long newPostId = postFromForm.getId();
         return "redirect:/posts/" + newPostId;
     }
 
