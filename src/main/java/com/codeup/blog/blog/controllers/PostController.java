@@ -3,6 +3,7 @@ package com.codeup.blog.blog.controllers;
 import com.codeup.blog.blog.models.Post;
 import com.codeup.blog.blog.repositories.PostRepository;
 import com.codeup.blog.blog.repositories.UserRepository;
+import com.codeup.blog.blog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,12 @@ public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 
     // View all posts
@@ -38,6 +41,7 @@ public class PostController {
     @GetMapping("/posts/create")
     public String getCreatePostForm(Model vModel) {
         vModel.addAttribute("post", new Post());
+
         return "posts/create";
     }
 
@@ -50,6 +54,11 @@ public class PostController {
         postFromForm.setUser(userDao.getOne(3L));
         postDao.save(postFromForm);
         long newPostId = postFromForm.getId();
+        emailService.prepareAndSend(
+                postFromForm,
+                "New Post on Springthyme in November",
+                "Your post '" + postFromForm.getTitle() + "' is now viewable on Springthyme in November."
+        );
         return "redirect:/posts/" + newPostId;
     }
 
