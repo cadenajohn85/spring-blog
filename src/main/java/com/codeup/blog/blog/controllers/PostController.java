@@ -69,15 +69,13 @@ public class PostController {
     }
 
     // Submit the form to edit a post
-    @PostMapping("/posts/edit")
-    public String editPost(@RequestParam("id") String id, @RequestParam("title") String title,
-                           @RequestParam("body") String body) {
-        long editPostId = Long.parseLong(id);
-        Post posttoEdit = postDao.getOne(editPostId);
-        posttoEdit.setBody(body);
-        posttoEdit.setTitle(title);
-        postDao.save(posttoEdit);
-        return "redirect:/posts/" + editPostId;
+    @PostMapping("/posts/{id}/edit")
+    public String editPost(@ModelAttribute Post editedPost) {
+        Post postToEdit = postDao.getOne(editedPost.getId());
+        postToEdit.setBody(editedPost.getBody());
+        postToEdit.setTitle(editedPost.getTitle());
+        postDao.save(postToEdit);
+        return "redirect:/posts/" + editedPost.getId();
     }
 
 }
