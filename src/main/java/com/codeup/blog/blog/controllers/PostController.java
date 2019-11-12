@@ -71,10 +71,8 @@ public class PostController {
     // Submit the form to edit a post
     @PostMapping("/posts/{id}/edit")
     public String editPost(@ModelAttribute Post editedPost) {
-        Post postToEdit = postDao.getOne(editedPost.getId());
-        postToEdit.setBody(editedPost.getBody());
-        postToEdit.setTitle(editedPost.getTitle());
-        postDao.save(postToEdit);
+        editedPost.setUser(userDao.getOne(3L));
+        postDao.save(editedPost);
         return "redirect:/posts/" + editedPost.getId();
     }
 
