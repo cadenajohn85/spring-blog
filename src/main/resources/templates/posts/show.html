@@ -16,8 +16,7 @@
     <p>Contact this post author at: <span th:text="${post.user.email}"></span>.</p>
 
     <div class="button-bar">
-        <form action="/posts/delete" method="post">
-            <input type="hidden" name="id" th:value="${post.id}">
+        <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">
             <button type="submit">Delete</button>
         </form>
 

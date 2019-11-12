@@ -54,10 +54,9 @@ public class PostController {
     }
 
     // Delete a post via a "Delete" Button
-    @PostMapping("/posts/delete")
-    public String deletePost(@RequestParam("id") String id) {
-        long deletePostId = Long.parseLong(id);
-        postDao.deleteById(deletePostId);
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable("id") long id) {
+        postDao.deleteById(id);
         return "redirect:/posts";
     }
 
