@@ -62,10 +62,9 @@ public class PostController {
     }
 
     // See the form to edit a post
-    @GetMapping("/posts/edit")
-    public String getEditPostForm(@RequestParam("id") String id, Model vModel) {
-        long editPostId = Long.parseLong(id);
-        vModel.addAttribute("post", postDao.getOne(editPostId));
+    @GetMapping("/posts/{id}/edit")
+    public String getEditPostForm(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("post", postDao.getOne(id));
         return "posts/edit";
     }
 

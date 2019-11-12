@@ -19,8 +19,7 @@
                 <input type="hidden" name="id" th:value="${post.id}">
                 <button type="submit">Delete</button>
             </form>
-            <form action="/posts/edit" method="get">
-                <input type="hidden" name="id" th:value="${post.id}">
+            <form th:action="@{'/posts/' + ${post.id} + '/edit'}" method="get">
                 <button type="submit">Edit</button>
             </form>
         </div>
