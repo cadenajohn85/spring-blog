@@ -9,30 +9,30 @@
 
     <div th:replace="fragments/navbar :: navbar"></div>
 
-    <h1 class="non-jumbo" th:text="${post.title}"></h1>
-
-    <p th:text="${post.body}"></p>
-
-    <div sec:authorize="isAuthenticated()">
-        <th:block th:if="${post.user.id != #authentication.principal.id}">
-            <p>Contact this post author at: <span th:text="${post.user.email}"></span>.</p>
-        </th:block>
-
-        <th:block th:if="${post.user.id == #authentication.principal.id}">
-            <div class="button-bar">
-                <form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="post">
-                    <button type="submit">Delete</button>
-                </form>
-
-                <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="get">
-                    <button type="submit">Edit</button>
-                </form>
+        <div class="jumbo card mb-3 mx-3">
+            <div class="card-body">
+                <h2 class="card-title" th:text="${post.title}"></h2>
+                <p class="card-text" th:text="${post.body}"></p>
             </div>
-        </th:block>
-        
-    </div>
+            <div sec:authorize="isAuthenticated()" class="card-footer">
+                <th:block th:if="${post.user.id != #authentication.principal.id}">
+                    <p>Contact this post author at: <span th:text="${post.user.email}"></span>.</p>
+                </th:block>
 
-    
+                <th:block th:if="${post.user.id == #authentication.principal.id}">
+                    <div class="button-bar">
+                        <form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+
+                        <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="get">
+                            <button type="submit">Edit</button>
+                        </form>
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
 
     <div th:replace="fragments/footer :: footer"></div>
 
