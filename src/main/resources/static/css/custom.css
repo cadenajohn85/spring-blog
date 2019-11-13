@@ -7,8 +7,16 @@ body {
     background-color: deepskyblue;
 }
 
-/*Add top margin to the first element underneath the navbar, since it has Z-index*/
-.custom-navbar + * {
+/*Add top margin to the first element underneath the navbar (jumbotron), since it has Z-index*/
+/*.custom-navbar + * {*/
+/*    margin-top: 3.5em;*/
+/*}*/
+
+.jumbotron {
+    margin-top: 3.5em;
+}
+
+.non-jumbo {
     margin-top: 1.5em;
 }
 

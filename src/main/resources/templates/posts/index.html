@@ -9,20 +9,15 @@
 
     <div th:replace="fragments/navbar :: navbar"></div>
 
-    <h1>View All Posts</h1>
+    <header class="jumbotron">
+        <h1 class="display-4 text-center">View All Posts</h1>
+    </header>
 
     <div th:each="post : ${posts}">
         <h2><a th:href="@{'posts/' + ${post.id}}" th:text="${post.title}"></a></h2>
         <p th:text="${post.body}"></p>
         <div class="button-bar">
 
-<!--            <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">-->
-<!--                <button type="submit">Delete</button>-->
-<!--            </form>-->
-
-<!--            <form th:action="@{'/posts/' + ${post.id} + '/edit'}" method="get">-->
-<!--                <button type="submit">Edit</button>-->
-<!--            </form>-->
         </div>
     </div>
 
