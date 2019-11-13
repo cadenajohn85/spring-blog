@@ -15,14 +15,14 @@
         <h2><a th:href="@{'posts/' + ${post.id}}" th:text="${post.title}"></a></h2>
         <p th:text="${post.body}"></p>
         <div class="button-bar">
-            <form action="/posts/delete" method="post">
-                <input type="hidden" name="id" th:value="${post.id}">
-                <button type="submit">Delete</button>
-            </form>
-            <form action="/posts/edit" method="get">
-                <input type="hidden" name="id" th:value="${post.id}">
-                <button type="submit">Edit</button>
-            </form>
+
+<!--            <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">-->
+<!--                <button type="submit">Delete</button>-->
+<!--            </form>-->
+
+<!--            <form th:action="@{'/posts/' + ${post.id} + '/edit'}" method="get">-->
+<!--                <button type="submit">Edit</button>-->
+<!--            </form>-->
         </div>
     </div>
 

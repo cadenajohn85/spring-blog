@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title th:text="${titleMsg}"></title>
@@ -13,16 +13,26 @@
 
     <p th:text="${post.body}"></p>
 
-    <div class="button-bar">
-        <form action="/posts/delete" method="post">
-            <input type="hidden" name="id" th:value="${post.id}">
-            <button type="submit">Delete</button>
-        </form>
-        <form action="/posts/edit" method="get">
-            <input type="hidden" name="id" th:value="${post.id}">
-            <button type="submit">Edit</button>
-        </form>
+    <div sec:authorize="isAuthenticated()">
+        <th:block th:if="${post.user.id != #authentication.principal.id}">
+            <p>Contact this post author at: <span th:text="${post.user.email}"></span>.</p>
+        </th:block>
+
+        <th:block th:if="${post.user.id == #authentication.principal.id}">
+            <div class="button-bar">
+                <form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="post">
+                    <button type="submit">Delete</button>
+                </form>
+
+                <form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="get">
+                    <button type="submit">Edit</button>
+                </form>
+            </div>
+        </th:block>
+        
     </div>
+
+    
 
     <div th:replace="fragments/footer :: footer"></div>
 
