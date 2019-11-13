@@ -7,18 +7,9 @@ body {
     background-color: deepskyblue;
 }
 
-.custom-navbar ul {
-    list-style: none;
-    display: flex;
-}
-
 /*Add top margin to the first element underneath the navbar, since it has Z-index*/
 .custom-navbar + * {
-    margin-top: 4em;
-}
-
-.custom li {
-    margin: 0 .5em;
+    margin-top: 1.5em;
 }
 
 .button-bar {
