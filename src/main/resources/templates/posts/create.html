@@ -11,7 +11,7 @@
 
     <h1>Create a New Post</h1>
 
-    <form action="/posts/create" method="post" th:object="${post}">
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
         <div class="form-group">
             <label for="title">Title</label>
             <input class="form-control" type="text" th:field="*{title}">

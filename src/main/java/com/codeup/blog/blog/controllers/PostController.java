@@ -50,7 +50,6 @@ public class PostController {
     public String submitCreatePostForm(@ModelAttribute Post postFromForm) {
 //        long newPostId = postDao.save(new Post(title, body, userDao.getOne(3L))).getId();
 
-//        long newPostId = postDao.save(postFromForm.setUser(userDao.getOne(3L))).getId();
         postFromForm.setUser(userDao.getOne(3L));
         postDao.save(postFromForm);
         long newPostId = postFromForm.getId();
