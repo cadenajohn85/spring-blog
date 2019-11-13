@@ -1,9 +1,11 @@
 package com.codeup.blog.blog.controllers;
 
 import com.codeup.blog.blog.models.Post;
+import com.codeup.blog.blog.models.User;
 import com.codeup.blog.blog.repositories.PostRepository;
 import com.codeup.blog.blog.repositories.UserRepository;
 import com.codeup.blog.blog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,15 +50,14 @@ public class PostController {
     // Submit the "Create Post" form
     @PostMapping("/posts/create")
     public String submitCreatePostForm(@ModelAttribute Post postFromForm) {
-//        long newPostId = postDao.save(new Post(title, body, userDao.getOne(3L))).getId();
-
-        postFromForm.setUser(userDao.getOne(3L));
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        postFromForm.setUser(userDao.findByUsername(loggedInUser.getUsername()));
         postDao.save(postFromForm);
         long newPostId = postFromForm.getId();
         emailService.prepareAndSend(
                 postFromForm,
-                "New Post on Springthyme in November",
-                "Your post '" + postFromForm.getTitle() + "' is now viewable on Springthyme in November."
+                "New Post on Spring in November",
+                "Your post '" + postFromForm.getTitle() + "' is now viewable on Spring in November."
         );
         return "redirect:/posts/" + newPostId;
     }
