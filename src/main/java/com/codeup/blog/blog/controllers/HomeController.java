@@ -9,13 +9,13 @@ public class HomeController {
 
 //    Create a HomeController class. This class should have one method with a GetMapping for /. It should return a string that says "This is the landing page!".
 
-    @GetMapping("/")
-    @ResponseBody
-    public String displayLandingPage() {
-        return "This is the landing page!";
-    }
+//    @GetMapping("/")
+//    @ResponseBody
+//    public String displayLandingPage() {
+//        return "This is the landing page!";
+//    }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String welcome() {
         return "home";
     }

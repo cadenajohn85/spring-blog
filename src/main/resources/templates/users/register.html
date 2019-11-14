@@ -9,19 +9,24 @@
 
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<h1>Register a New Account</h1>
+<h1 class="non-jumbo">Register a New Account</h1>
 
 <form th:action="@{/register}" method="post" th:object="${user}">
-    <label for="username">Username</label>
-    <input th:field="*{username}">
-    <br>
+    <div class="form-group w-25">
+        <label for="username">Username</label>
+        <input class="form-control" th:field="*{username}">
+    </div>
 
-    <label for="email">E-mail</label>
-    <input th:field="*{email}">
-    <br>
 
-    <label for="password">Password</label>
-    <input type="password" th:field="*{password}">
+    <div class="form-group w-25">
+        <label for="email">E-mail</label>
+        <input class="form-control" th:field="*{email}">
+    </div>
+
+    <div class="form-group w-25">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" th:field="*{password}">
+    </div>
 
     <button>Register</button>
 </form>
