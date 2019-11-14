@@ -3,15 +3,6 @@ body {
     background: lightblue;
 }
 
-.custom-navbar {
-    background-color: deepskyblue;
-}
-
-/*Add top margin to the first element underneath the navbar (jumbotron), since it has Z-index*/
-/*.custom-navbar + * {*/
-/*    margin-top: 3.5em;*/
-/*}*/
-
 .jumbotron, .jumbo {
     margin-top: 3.5em;
 }
@@ -27,4 +18,8 @@ body {
 .button-bar form {
     display: inline;
     margin: 0 .5em;
+}
+
+.rounded-corners {
+    border-radius: 5px;
 }
