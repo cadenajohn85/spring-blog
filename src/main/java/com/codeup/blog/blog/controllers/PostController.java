@@ -39,6 +39,14 @@ public class PostController {
         return "posts/show";
     }
 
+    // View all of a logged-in user's posts
+    @GetMapping("/posts/viewmine")
+    public String getAllMyPosts(Model vModel) {
+        // Change the findAll method
+        vModel.addAttribute("posts", postDao.findAll());
+        return "posts/viewmine";
+    }
+
     // View the "Create Post" form
     @GetMapping("/posts/create")
     public String getCreatePostForm(Model vModel) {
