@@ -42,8 +42,9 @@ public class PostController {
     // View all of a logged-in user's posts
     @GetMapping("/posts/viewmine")
     public String getAllMyPosts(Model vModel) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // Change the findAll method
-        vModel.addAttribute("posts", postDao.findAll());
+        vModel.addAttribute("posts", postDao.findByUserId(loggedInUser.getId()));
         return "posts/viewmine";
     }
 
