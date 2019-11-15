@@ -52,7 +52,6 @@ public class PostController {
     @GetMapping("/posts/create")
     public String getCreatePostForm(Model vModel) {
         vModel.addAttribute("post", new Post());
-
         return "posts/create";
     }
 
@@ -88,7 +87,8 @@ public class PostController {
     // Submit the form to edit a post
     @PostMapping("/posts/{id}/edit")
     public String editPost(@ModelAttribute Post editedPost) {
-        editedPost.setUser(userDao.getOne(3L));
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        editedPost.setUser(userDao.getOne(loggedInUser.getId()));
         postDao.save(editedPost);
         return "redirect:/posts/" + editedPost.getId();
     }

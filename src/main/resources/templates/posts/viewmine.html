@@ -17,7 +17,7 @@
     <div th:each="post : ${posts}" class="col-sm-6">
         <div class="card mb-3 mx-3">
             <div class="card-body">
-                <h5 class="card-title"><a th:href="@{'posts/' + ${post.id}}" th:text="${post.title}"></a></h5>
+                <h5 class="card-title"><a th:href="@{'/posts/' + ${post.id}}" th:text="${post.title}"></a></h5>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="${post.user.username}"></h6>
                 <p class="card-text" th:text="${post.body}"></p>
             </div>
